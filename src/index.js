@@ -1,13 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { ChakraProvider } from "@chakra-ui/react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { GalleryProvider } from "./contexts/gallery.context";
+import AuthProvider from "./contexts/auth.context";
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <ChakraProvider>
+      <BrowserRouter>
+      <AuthProvider>
+        <GalleryProvider>
+          <App />
+        </GalleryProvider>
+      </AuthProvider>
+      </BrowserRouter>
+    </ChakraProvider>
   </React.StrictMode>
 );
 
