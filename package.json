@@ -2,6 +2,7 @@
   "name": "react-gallery-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://Bipin-26.github.io/Gallery-App",
   "dependencies": {
     "@chakra-ui/react": "^2.7.0",
     "@emotion/react": "^11.11.1",
@@ -21,6 +22,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -45,6 +48,7 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "gh-pages": "^5.0.0"
   }
 }
