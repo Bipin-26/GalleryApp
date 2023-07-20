@@ -47,7 +47,7 @@ const Search = ({ items }) => {
   }
   const onHandleFilteredItems = (user) => {
     navigate({
-      pathname:'/uploadedBy',
+      pathname:'/home/uploadedBy',
       search:`${createSearchParams({user:user.username})}`
     })
   }

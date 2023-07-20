@@ -1,5 +1,5 @@
 // import './App.css';
-import { Container, Text } from "@chakra-ui/react";
+import { Container, Show, Text, Hide } from "@chakra-ui/react";
 import Navbar from "./components/navbar.component";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Home from "./pages/home.page";
@@ -16,6 +16,7 @@ import MyGallery from "./pages/my-gallery";
 import UserProfileCard from "./pages/user-profile-card.page";
 import EditPage from "./pages/edit.page";
 import PageNotFound from "./pages/404.page";
+import AlertContainer from "./components/alert.component";
 
 function App() {
   // const { readDoc } = Firestore;
@@ -31,28 +32,35 @@ function App() {
 
   // console.log("USER LIST --------------", currentUser)
   return (
+    <>
+    <Show breakpoint='(max-width: 480px)'>
     <Routes>
-          <Route path="/" element={<Navbar />}>
+          <Route path="/home" element={<Navbar />}>
             <Route index element={<Home />} />
             <Route
-              path="/search-feed"
+              path="/home/search-feed"
               element={<Search items={state.items} />}
             />
-            <Route path="/upload-image" element={<UploadPage />} />
-            <Route path="/edit-post" element={<EditPage />} />
-            <Route path="/profile" element={<Profile items={state.items} />} />
+            <Route path="/home/upload-image" element={<UploadPage />} />
+            <Route path="/home/edit-post" element={<EditPage />} />
+            <Route path="/home/profile" element={<Profile items={state.items} />} />
             <Route
-              path="/uploadedBy"
+              path="/home/uploadedBy"
               element={<UserProfileCard items={state.items} />}
             />
           </Route>
           <Route
-            path="/:id/comments"
+            path="/home/:id/comments"
             element={<CommentSection items={state.items} />}
           />
           <Route path="*" element={<PageNotFound />} />
-          <Route path="/authenticate/sign-in" element={<SignInPage />} />
+          <Route exact path="/" element={<SignInPage />} />
     </Routes>
+    </Show>
+    <Hide breakpoint='(max-width:480px)'>
+      <AlertContainer />
+    </Hide>
+    </>
   );
 }
 

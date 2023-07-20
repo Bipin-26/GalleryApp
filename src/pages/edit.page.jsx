@@ -41,7 +41,7 @@ import {
     const { dispatch, state, loadImages } = useContext(GalleryContext);
     const item = state.items.find((item) => {
       if (item.id === id) {
-        console.log("ITEM TO BE EDITED",item)
+        // console.log("ITEM TO BE EDITED",item)
         return item;
       }
     });
@@ -52,7 +52,7 @@ import {
     const [caption, setCaption] = useState(item?.caption);
     // console.log('CAPTION', caption)
     
-    console.log("ID", id)
+    // console.log("ID", id)
     const navigate = useNavigate();
     const [previewObjectFit, setPreviewObjectFit] = useState(item?.previewType);
 
@@ -62,7 +62,7 @@ import {
     const handleOnSubmit = (e) => {
       e.preventDefault();
       setIsUploading(true);
-      updateDocument(item.id, "gallery", caption, previewObjectFit).then(loadImages).then(() => navigate('/profile')).then(setIsUploading(false))
+      updateDocument(item.id, "gallery", caption, previewObjectFit).then(loadImages).then(() => navigate('/home/profile')).then(setIsUploading(false))
     };
   
     return (
@@ -82,7 +82,7 @@ import {
                     size="lg"
                     margin="0"
                     padding="0"
-                    onClick={() => {navigate('/profile')}}
+                    onClick={() => {navigate('/home/profile')}}
                   />
                   <Divider orientation="vertical" height="80%" />
                   <Box>

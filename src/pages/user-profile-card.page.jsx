@@ -4,23 +4,14 @@ import {
   Avatar,
   Text,
   Divider,
-  Grid,
-  GridItem,
-  Image,
-  Skeleton,
-  SkeletonText,
-  SkeletonCircle,
 } from "@chakra-ui/react";
 import { useAuthContext } from "../contexts/auth.context";
 import { BsArrowLeft } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import GridContainer from "../components/grid-container.component";
-import { useContext } from "react";
-import { GalleryContext } from "../contexts/gallery.context";
 
 const UserProfileCard = ({ items }) => {
 
-  const { loading } = useContext(GalleryContext);
 
   const navigate = useNavigate();
   const { userList } = useAuthContext();
@@ -65,21 +56,15 @@ const UserProfileCard = ({ items }) => {
           justifyContent="space-evenly"
           padding="30px 0"
         >
-          {userDetails ? <Avatar size="40px" src={userDetails.photoURL} /> : <SkeletonCircle size='100px' /> }
+          <Avatar size="40px" src={userDetails.photoURL} />
 
           <Box display="flex" flexDirection="column" alignItems="center">
-          { filteredItems ? 
-            <>
             <Text fontSize="20px" fontWeight="600">
               Uploads
             </Text>
               <Text fontSize="20px" fontWeight="600">
                 {filteredItems.length}
               </Text>
-            </> : <>
-              <SkeletonText noOfLines='2' skeletonHeight='5px' />
-            </>
-            }
           </Box>
         </Box>
         <Divider bg="gray.600" />

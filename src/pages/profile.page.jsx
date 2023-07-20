@@ -71,7 +71,7 @@ const { deleteDoc } = Firestore;
 // }
 
 const Profile = ({ items }) => {
-  console.log("YOU ARE INSIDE PROFILE PAGE")
+  // console.log("YOU ARE INSIDE PROFILE PAGE")
   const { logout, currentUserDetail } = useAuthContext();
   const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false)
@@ -96,7 +96,7 @@ const Profile = ({ items }) => {
     });
   const logOutHandler = () => {
     logout();
-    navigate("/authenticate/sign-in");
+    navigate("/");
   };
 
   const { onModalHandler, modalItem, isOpen, onClose, onOpen, setModalItem, loadImages } =
@@ -112,7 +112,7 @@ const Profile = ({ items }) => {
 
 
   const onDeleteHandler = () => {
-    console.log("YOU ARE INSIDE DELETE FUNCTION IN PROFILE")
+    // console.log("YOU ARE INSIDE DELETE FUNCTION IN PROFILE")
     deleteDoc(modalItem.id, "gallery").then(loadImages)
   }
   return (
@@ -237,7 +237,7 @@ const Profile = ({ items }) => {
                         <Menu>
                           <MenuButton><CiMenuKebab size='25px' /></MenuButton>
                           <MenuList>
-                            <MenuItem bg='none' onClick={()=>{navigate({pathname: '/edit-post',
+                            <MenuItem bg='none' onClick={()=>{navigate({pathname: '/home/edit-post',
                             search:`${createSearchParams({id:modalItem.id})}`
                           })}} >
                               Edit

@@ -11,7 +11,7 @@ const PageNotFound = () => {
                     <Text fontSize='72px' fontFamily='Kablammo, cursive' letterSpacing='10px'>404</Text>
                     <Text>Page Not Found</Text>
                 </Box>
-                <Button bg='none' _focus={{bg:'none'}} margin='0 auto' display='flex' gap='10px' marginTop='50px' alignItems='center' onClick={() => navigate('/')} >
+                <Button bg='none' _focus={{bg:'none'}} margin='0 auto' display='flex' gap='10px' marginTop='50px' alignItems='center' onClick={() => navigate('/home')} >
                     <HiHome size="30px" />
                     <Text>
                     Go To Home

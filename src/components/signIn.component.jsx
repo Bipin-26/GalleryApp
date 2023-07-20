@@ -8,7 +8,7 @@ const SignIn = () => {
   const navigate = useNavigate();
   const loginHandler = async () => {
     await login();
-    navigate("/");
+    navigate("/home");
   };
   return (
     <>

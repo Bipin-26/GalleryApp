@@ -1,18 +1,22 @@
-import { Box, Container, Flex, Text } from "@chakra-ui/react";
+import { Box, Container, Flex, Image, Text } from "@chakra-ui/react";
 import { HiHome, HiUserCircle } from "react-icons/hi";
 import { FiSearch } from "react-icons/fi";
 import { GrGallery } from "react-icons/gr";
 import { BiImageAdd } from "react-icons/bi";
 import { Link, Outlet } from "react-router-dom";
+import { useAuthContext } from "../contexts/auth.context";
 const Navbar = () => {
+  const { currentUserDetail } = useAuthContext();
+
   return (
     <>
-    <Container zIndex='999' position="fixed" bottom='0' margin={'0'} padding={'0'} boxSizing="border-box" height='65px' bg='#fff' >
+    <Container zIndex='999' position="fixed" bottom='0' margin='0' padding='0' boxSizing="border-box" height='65px' bg='#fff' >
       <Box
         borderTop='1px solid grey'
-        borderRadius='20px'
+        borderRadius='0px'
         padding='10px 10px'
         margin='0'
+        bg="#fff"
       >
         <Flex alignItems="center" justifyContent='space-evenly'>
           <Box
@@ -22,7 +26,7 @@ const Navbar = () => {
             justifyContent="center"
             gap="2px"
           >
-            <Link to='/'>
+            <Link to='/home'>
             <HiHome size="35px" />
             </Link>
           </Box>
@@ -33,7 +37,7 @@ const Navbar = () => {
             justifyContent="center"
             gap="2px"
           >
-            <Link to='/search-feed'>
+            <Link to='/home/search-feed'>
             <FiSearch size="35px" />
             </Link>
           </Box>
@@ -44,7 +48,7 @@ const Navbar = () => {
             justifyContent="center"
             gap="2px"
           >
-            <Link to='/upload-image' >
+            <Link to='/home/upload-image' >
             <BiImageAdd size="35px" />
             </Link>
           </Box>
@@ -66,8 +70,10 @@ const Navbar = () => {
             justifyContent="center"
             gap="2px"
           > 
-          <Link to='/profile' >
-            <HiUserCircle size="35px" color="grey" />
+          <Link to={currentUserDetail ? '/home/profile' : '/'} >
+            {
+              currentUserDetail ? <Image src={currentUserDetail.photoURL} boxSize='35px' borderRadius='50%' /> : <HiUserCircle size="35px" color="grey" />
+            }
           </Link>
           </Box>
         </Flex>

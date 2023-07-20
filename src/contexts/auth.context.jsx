@@ -13,7 +13,7 @@ const AuthProvider = ({ children }) => {
   // const [currentUserDetail, setCurrentUserDetail] = useState(null)
   const username = currentUser?.displayName.split(" ").join("").toLowerCase();
   const getAllUser = () => readUserDoc("users").then((result) => setUserList(result));
-  console.log("USER LIST ===========> ",userList)
+  // console.log("USER LIST ===========> ",userList)
 
   // console.log("CURRENT USER DETAILS", currentUserDetail)
   const login = () =>
@@ -26,14 +26,14 @@ const AuthProvider = ({ children }) => {
   const logout = () => signOut().then(() => {setCurrentUser(null);});
   const authenticate = () =>{
     getCurrentUser()
-      .then(result => {console.log("PROMISE RESULT",result); setCurrentUser(result)})
+      .then(result => { setCurrentUser(result)})
       }
     
       // console.log(getCurrentUser())
   const currentUserDetail = userList !== null && userList.find(user => user.username === username);
-  console.log("Current User details", currentUserDetail)
+  // console.log("Current User details", currentUserDetail)
   
-  console.log("USERNAME", username)
+  // console.log("USERNAME", username)
 
   const getUserDetailsById = (userId) => {
     if(userList !== null){
@@ -49,7 +49,7 @@ const AuthProvider = ({ children }) => {
     }
   }
 
-  console.log("CURRENT USER DETAIL", currentUserDetail)
+  // console.log("CURRENT USER DETAIL", currentUserDetail)
 
   const value = useMemo(() => {
     return {

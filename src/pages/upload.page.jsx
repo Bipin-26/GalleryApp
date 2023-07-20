@@ -1,8 +1,6 @@
 import {
   Box,
   Button,
-  Card,
-  CardBody,
   CloseButton,
   Container,
   Divider,
@@ -18,8 +16,7 @@ import {
   ModalFooter,
   ModalBody,
   Progress,
-  useDisclosure,
-  Select
+  useDisclosure
 } from "@chakra-ui/react";
 import { useContext, useRef, useState } from "react";
 import { MdAdd } from "react-icons/md";
@@ -75,7 +72,7 @@ const UploadPage = () => {
           "gallery"
         ).then(() => {
           loadImages();
-          navigate("/");
+          navigate("/home");
           setIsUploading(false);
           clearPreview();
         });

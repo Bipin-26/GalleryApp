@@ -6,6 +6,7 @@ import {
   Avatar,
   Box,
   Text,
+  Skeleton,
 } from "@chakra-ui/react";
 import { useContext } from "react";
 import { FaRegHeart, FaRegComment, FaHeart } from "react-icons/fa";
@@ -18,7 +19,7 @@ import getTimeDifference from "../utils/time.utils";
 const CardComponent = ({ item }) => {
 
   const { path, caption, id, likedBy, uploadedBy, uploadedAt, previewType } = item;
-  const { username, getUserDetailsById } = useAuthContext();
+  const { username, getUserDetailsById, currentUserDetail } = useAuthContext();
   const { imageLikeHandler } = useContext(GalleryContext)
   const navigate = useNavigate()
   const url = useLocation()
@@ -58,11 +59,11 @@ const CardComponent = ({ item }) => {
 
   const handleUserClicks = () => {
     if(userDetail.username === username){
-      navigate('/profile')
+      navigate('/home/profile')
     }
-    if(url.pathname !== '/uploadedBy' && userDetail.username !== username){
+    if(url.pathname !== '/home/uploadedBy' && userDetail.username !== username){
       navigate({
-        pathname:'/uploadedBy',
+        pathname:'/home/uploadedBy',
         search:`${createSearchParams({user:userDetail.username})}`
       })
     }
@@ -104,7 +105,7 @@ const CardComponent = ({ item }) => {
           ) : (
             <FaRegHeart size="25px" onClick={() => imageLikeHandler(id,username)} />
           )}
-          <FaRegComment size="25px" onClick={() => { navigate(`/${id}/comments`) }} />
+          <FaRegComment size="25px" onClick={() => { navigate(`/home/${id}/comments`) }} />
         </Box>
         {likedBy.length === 1 ? <Text fontWeight='600' marginLeft='5px'>{`${likedBy.length} like`}</Text> : <Text fontWeight='600' marginLeft='5px' >{`${likedBy.length} likes`}</Text>}
         <Box marginLeft='5px' display='flex' alignItems='center' gap='3px' >
