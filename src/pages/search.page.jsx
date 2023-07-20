@@ -58,7 +58,7 @@ const Search = ({ items }) => {
         justifyContent="center"
         alignItems="center"
         padding="10px 0"
-        borderBottom="2px solid gray"
+        borderBottom="1px solid grey"
         position='fixed'
         top='0'
         bg='white'
@@ -71,7 +71,7 @@ const Search = ({ items }) => {
           width="95%"
           bg="white"
           borderRadius="20px"
-          border="1px solid gray"
+          border="1px solid grey"
           onChange={handleSearch}
         />
       </Box>
@@ -89,7 +89,17 @@ const Search = ({ items }) => {
         margin="70px 0"
         padding='0'
       >
-        <GridContainer items={items} />
+        {
+          items.length > 0 ? 
+          <GridContainer items={items} /> : <Text
+          fontWeight="600"
+          color="gray.400"
+          textAlign="center"
+          paddingTop="15px"
+        >
+          No Uploads
+        </Text>
+        }
       </Container>
     </>
   );

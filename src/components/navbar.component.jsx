@@ -16,7 +16,6 @@ const Navbar = () => {
         borderRadius='0px'
         padding='10px 10px'
         margin='0'
-        bg="#fff"
       >
         <Flex alignItems="center" justifyContent='space-evenly'>
           <Box

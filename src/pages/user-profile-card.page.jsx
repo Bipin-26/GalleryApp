@@ -1,18 +1,10 @@
-import {
-  Box,
-  Container,
-  Avatar,
-  Text,
-  Divider,
-} from "@chakra-ui/react";
+import { Box, Container, Image, Text, Divider } from "@chakra-ui/react";
 import { useAuthContext } from "../contexts/auth.context";
 import { BsArrowLeft } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import GridContainer from "../components/grid-container.component";
 
 const UserProfileCard = ({ items }) => {
-
-
   const navigate = useNavigate();
   const { userList } = useAuthContext();
   const username = new URLSearchParams(window.location.search).get("user");
@@ -23,14 +15,11 @@ const UserProfileCard = ({ items }) => {
     }
   });
 
-
   const filteredItems = items.filter((item) => {
     if (item.uploadedBy === userDetails.id) {
       return item;
     }
   });
-
-
 
   return (
     <Container margin="0" padding="0">
@@ -56,27 +45,37 @@ const UserProfileCard = ({ items }) => {
           justifyContent="space-evenly"
           padding="30px 0"
         >
-          <Avatar size="40px" src={userDetails.photoURL} />
+          <Box display="flex" flexDirection="column" alignItems='center'>
+            <Image
+              src={userDetails.photoURL}
+              boxSize="100px"
+              borderRadius="50%"
+            />
+            <Text fontWeight="600" fontSize="17px">
+              {userDetails.username}
+            </Text>
+          </Box>
 
           <Box display="flex" flexDirection="column" alignItems="center">
             <Text fontSize="20px" fontWeight="600">
               Uploads
             </Text>
-              <Text fontSize="20px" fontWeight="600">
-                {filteredItems.length}
-              </Text>
+            <Text fontSize="20px" fontWeight="600">
+              {filteredItems.length}
+            </Text>
           </Box>
         </Box>
         <Divider bg="gray.600" />
         <Text
           marginTop="5px"
-          fontStyle="italic"
           textAlign="center"
           fontSize="18px"
           fontWeight="600"
           color="gray.600"
-        >{`${username}'s uploads`}</Text>
-      </Box> 
+        >
+          Uploads
+        </Text>
+      </Box>
       <Box margin="200px 0 65px 0" padding="0" overflow="scroll">
         {filteredItems && filteredItems.length != 0 ? (
           <GridContainer items={filteredItems} />

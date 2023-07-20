@@ -122,11 +122,10 @@ const Profile = ({ items }) => {
           display="flex"
           flexDirection="column"
           justifyContent="center"
-          gap="25px"
           position="fixed"
           top="0"
           bg="white"
-          height="200px"
+          height="220px"
           width="100%"
           paddingBottom="10px"
           borderBottom="2px solid gray"
@@ -134,17 +133,17 @@ const Profile = ({ items }) => {
           <Box
             display="flex"
             alignItems="center"
-            justifyContent="center"
-            gap="20px"
+            justifyContent="space-evenly"
             padding="15px"
           >
             {currentUserDetail && (
-              <Box position="relative">
+              <Box position="relative" display='flex' flexDirection='column' alignItems='center' justifyContent='center' gap='5px' >
                 <Image
                   src={currentUserDetail.photoURL}
                   boxSize="100px"
                   borderRadius="50%"
                 />
+                <Text fontWeight='600' fontSize='17px' >{currentUserDetail.username}</Text>
               </Box>
             )}
             <Box display="flex" flexDirection="column" alignItems="center">
@@ -170,7 +169,7 @@ const Profile = ({ items }) => {
           fontWeight="600"
           textAlign="center"
           position="fixed"
-          top="200px"
+          top="220px"
           padding="10px 0"
           bg="white"
           width="100%"
@@ -259,7 +258,14 @@ const Profile = ({ items }) => {
               );
             })
           ) : (
-            <Text textAlign="center">No Uploads</Text>
+            <Text
+          fontWeight="600"
+          color="gray.400"
+          textAlign="center"
+          paddingTop="15px"
+        >
+          No Uploads
+        </Text>
           )}
         </Box>
       </Container>
