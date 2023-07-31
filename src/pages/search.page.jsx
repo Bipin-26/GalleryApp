@@ -1,44 +1,31 @@
 import {
-  Card,
-  CardBody,
-  Image,
   Container,
-  Grid,
-  GridItem,
   Input,
   Box,
   Text,
-  Avatar,
-  Modal,
-  ModalBody,
-  ModalHeader,
-  useDisclosure,
-  ModalFooter,
-  ModalOverlay,
-  ModalContent,
-  ModalCloseButton
+  Avatar
 } from "@chakra-ui/react";
-import CardComponent from "../components/card.component";
-import { useContext, useState, useEffect } from "react";
+// import CardComponent from "../components/card.component";
+import { useState } from "react";
 import { useAuthContext } from "../contexts/auth.context";
-import { GalleryContext } from "../contexts/gallery.context";
+// import { GalleryContext } from "../contexts/gallery.context";
 import { createSearchParams, useNavigate } from "react-router-dom";
-import SingleCardComponent from "../components/cardModal.component";
+// import SingleCardComponent from "../components/cardModal.component";
 import GridContainer from "../components/grid-container.component";
-import CardModal from "../components/cardModal.component";
+// import CardModal from "../components/cardModal.component";
 
 const Search = ({ items }) => {
   const [searchInput, setSearchInput] = useState("");
   const [filteredUserList, setFilteredUserList] = useState(null);
   const { username } = useAuthContext()
   const { userList } = useAuthContext()
-  const { getFilteredItems } = useContext(GalleryContext)
+  // const { getFilteredItems } = useContext(GalleryContext)
   const navigate = useNavigate();
   const handleSearch = (e) => {
     e.preventDefault();
-    if(userList!==null && e.target.value.length !=0 ){
+    if(userList!==null && e.target.value.length !==0 ){
       setSearchInput(e.target.value.split(" ").join("").toLowerCase());
-      const filteredUser = userList.filter(user => { return user.username!=username && user.username.includes(searchInput)})
+      const filteredUser = userList.filter(user => { return user.username!==username && user.username.includes(searchInput)})
       setFilteredUserList(filteredUser)
     }else{
       setSearchInput("");

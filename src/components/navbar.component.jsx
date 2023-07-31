@@ -1,7 +1,7 @@
-import { Box, Container, Flex, Image, Text } from "@chakra-ui/react";
+import { Box, Container, Flex, Image } from "@chakra-ui/react";
 import { HiHome, HiUserCircle } from "react-icons/hi";
 import { FiSearch } from "react-icons/fi";
-import { GrGallery } from "react-icons/gr";
+// import { GrGallery } from "react-icons/gr";
 import { BiImageAdd } from "react-icons/bi";
 import { Link, Outlet } from "react-router-dom";
 import { useAuthContext } from "../contexts/auth.context";

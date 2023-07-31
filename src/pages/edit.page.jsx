@@ -1,8 +1,6 @@
 import {
     Box,
     Button,
-    Card,
-    CardBody,
     CloseButton,
     Container,
     Divider,
@@ -10,7 +8,6 @@ import {
     FormLabel,
     Image,
     Input,
-    Text,
     Modal,
     ModalOverlay,
     ModalContent,
@@ -18,27 +15,26 @@ import {
     ModalFooter,
     ModalBody,
     Progress,
-    useDisclosure,
-    Select
+    useDisclosure
   } from "@chakra-ui/react";
-  import { useContext, useRef, useState } from "react";
-  import { MdAdd } from "react-icons/md";
-  import { FiCheck, FiUpload } from "react-icons/fi";
-  import { BiArrowBack } from "react-icons/bi";
+  import { useContext, useState } from "react";
+  // import { MdAdd } from "react-icons/md";
+  import { FiCheck } from "react-icons/fi";
+  // import { BiArrowBack } from "react-icons/bi";
   import { GalleryContext } from "../contexts/gallery.context";
-  import Storage from "../utils/storage.utils";
+  // import Storage from "../utils/storage.utils";
   import Firestore from "../utils/firestore.utils";
   import { useNavigate } from "react-router-dom";
-  import { useAuthContext } from "../contexts/auth.context";
-  import { getCurrentTime } from "../utils/time.utils";
+  // import { useAuthContext } from "../contexts/auth.context";
+  // import { getCurrentTime } from "../utils/time.utils";
   
-  const { uploadFile, downloadFile } = Storage;
+  // const { uploadFile, downloadFile } = Storage;
   const { updateDocument } = Firestore;
   
   const EditPage = () => {
     // console.log('ITEMS IN EDIT PAGE', item)
     const id = new URLSearchParams(window.location.search).get('id')
-    const { dispatch, state, loadImages } = useContext(GalleryContext);
+    const { state, loadImages } = useContext(GalleryContext);
     const item = state.items.find((item) => {
       if (item.id === id) {
         // console.log("ITEM TO BE EDITED",item)

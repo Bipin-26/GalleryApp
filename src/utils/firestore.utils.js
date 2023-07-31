@@ -1,4 +1,4 @@
-import { doc, setDoc, getDocs, serverTimestamp, collection, updateDoc, arrayUnion, getDoc, deleteDoc } from "firebase/firestore"
+import { doc, setDoc, getDocs, collection, updateDoc, arrayUnion, deleteDoc } from "firebase/firestore"
 import { db } from "./firebase.utils"
 import { v4 as uuidv4 } from 'uuid'
 const Firestore = {
@@ -87,7 +87,7 @@ const Firestore = {
         })
     },
     readUserDoc:(...args)=>{
-        const [collection_name, username] = args;
+        const [collection_name] = args;
         return new Promise(async resolve => {
             let docs=[]
             const collectionRef = collection(db, collection_name);

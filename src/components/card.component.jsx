@@ -6,7 +6,6 @@ import {
   Avatar,
   Box,
   Text,
-  Skeleton,
 } from "@chakra-ui/react";
 import { useContext } from "react";
 import { FaRegHeart, FaRegComment, FaHeart } from "react-icons/fa";
@@ -19,7 +18,7 @@ import getTimeDifference from "../utils/time.utils";
 const CardComponent = ({ item }) => {
 
   const { path, caption, id, likedBy, uploadedBy, uploadedAt, previewType } = item;
-  const { username, getUserDetailsById, currentUserDetail } = useAuthContext();
+  const { username, getUserDetailsById } = useAuthContext();
   const { imageLikeHandler } = useContext(GalleryContext)
   const navigate = useNavigate()
   const url = useLocation()

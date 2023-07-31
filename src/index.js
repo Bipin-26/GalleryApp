@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ChakraProvider } from "@chakra-ui/react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { GalleryProvider } from "./contexts/gallery.context";
 import AuthProvider from "./contexts/auth.context";
 const root = ReactDOM.createRoot(document.getElementById("root"));

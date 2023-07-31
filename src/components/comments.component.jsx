@@ -1,6 +1,5 @@
 import {
   Button,
-  CloseButton,
   Container,
   FormControl,
   Input,
@@ -9,7 +8,7 @@ import {
   Avatar,
 } from "@chakra-ui/react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import Firestore from "../utils/firestore.utils";
 import { useAuthContext } from "../contexts/auth.context";
 import { GalleryContext } from "../contexts/gallery.context";
@@ -17,7 +16,7 @@ import { MdOutlineClose } from "react-icons/md";
 import { RiSendPlaneFill } from "react-icons/ri";
 import getTimeDifference, { getCurrentTime } from "../utils/time.utils";
 
-const { addComment, readUserDoc } = Firestore;
+const { addComment } = Firestore;
 const CommentSection = ({ items }) => {
   const { currentUserDetail, username, userList } = useAuthContext();
   const { loadImages } = useContext(GalleryContext)

@@ -19,9 +19,8 @@ import {
   useDisclosure
 } from "@chakra-ui/react";
 import { useContext, useRef, useState } from "react";
-import { MdAdd } from "react-icons/md";
+
 import { FiCheck, FiUpload } from "react-icons/fi";
-import { BiArrowBack } from "react-icons/bi";
 import { GalleryContext } from "../contexts/gallery.context";
 import Storage from "../utils/storage.utils";
 import Firestore from "../utils/firestore.utils";
@@ -37,7 +36,7 @@ const UploadPage = () => {
   const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { currentUser, currentUserDetail } = useAuthContext();
+  const { currentUserDetail } = useAuthContext();
   const currentTime = getCurrentTime().toString();
   const navigate = useNavigate();
   const [previewObjectFit, setPreviewObjectFit] = useState("contain");

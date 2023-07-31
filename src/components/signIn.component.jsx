@@ -1,10 +1,10 @@
-import { Button, Box, Text, Container, VStack, Image } from "@chakra-ui/react";
+import { Button, Box, Text, Container, Image } from "@chakra-ui/react";
 import { FcGoogle } from "react-icons/fc";
 import { useAuthContext } from "../contexts/auth.context";
 import { useNavigate } from "react-router-dom";
 import bgImageSource from "../assets/login-bg.jpg";
 const SignIn = () => {
-  const { login, currentUser } = useAuthContext();
+  const { login } = useAuthContext();
   const navigate = useNavigate();
   const loginHandler = async () => {
     await login();

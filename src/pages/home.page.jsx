@@ -1,12 +1,12 @@
-import { Container, Flex, Box, Text, calc, Skeleton } from "@chakra-ui/react"
+import { Container, Box, Text } from "@chakra-ui/react"
 import CardComponent from "../components/card.component"
 import { useContext } from "react"
 import { GalleryContext } from "../contexts/gallery.context"
-import { useAuthContext } from "../contexts/auth.context"
+// import { useAuthContext } from "../contexts/auth.context"
 
 const Home = () => {
     const { state } = useContext(GalleryContext)
-    const { currentUserDetail } = useAuthContext()
+    // const { currentUserDetail } = useAuthContext()
     // console.log("SORTED ITEMS",state.items.uploadedAt.sort())
     return (
         <>

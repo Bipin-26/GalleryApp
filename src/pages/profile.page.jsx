@@ -13,25 +13,17 @@ import {
   Menu,
   MenuButton,
   MenuList,
-  MenuItem,
-  AlertDialog,
-  AlertDialogContent,
-  AlertDialogBody,
-  AlertDialogHeader,
-  AlertDialogOverlay,
-  AlertDialogFooter,
-  IconButton
-  // MenuIcon
+  MenuItem
 } from "@chakra-ui/react";
 import { useAuthContext } from "../contexts/auth.context";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import { CiMenuKebab } from 'react-icons/ci'
-import GridContainer from "../components/grid-container.component";
-import { useState, useContext, useEffect, useRef } from "react";
+// import GridContainer from "../components/grid-container.component";
+import {  useContext, useEffect } from "react";
 import { GalleryContext } from "../contexts/gallery.context";
 import CardComponent from "../components/card.component";
 import Firestore from "../utils/firestore.utils";
-import EditPage from "./edit.page";
+// import EditPage from "./edit.page";
 
 const { deleteDoc } = Firestore;
 
@@ -74,7 +66,7 @@ const Profile = ({ items }) => {
   // console.log("YOU ARE INSIDE PROFILE PAGE")
   const { logout, currentUserDetail } = useAuthContext();
   const navigate = useNavigate();
-  const [isEditing, setIsEditing] = useState(false)
+  // const [isEditing, setIsEditing] = useState(false)
   const getImageUploadedDates = (items) => 
     Array.from(
       new Set(
@@ -176,7 +168,7 @@ const Profile = ({ items }) => {
         >
           Your Uploads
         </Text>
-        <Box marginTop="245px">
+        <Box marginTop="265px">
           {
           currentUserUploadedDates.length > 0 ? (
             currentUserUploadedDates.map((uploadDate) => {
@@ -189,12 +181,13 @@ const Profile = ({ items }) => {
                     marginLeft="5px"
                     fontSize="15px"
                   >
+                    {console.log(uploadDate)}
                     {uploadDate}
                   </Text>
                   <Grid
                     templateColumns="repeat(2, 1fr)"
                     gap={1}
-                    bg="gray.200"
+                    // bg="gray.200"
                     marginBottom="10px"
                   >
                     {currentUserUploads.map((item) => {

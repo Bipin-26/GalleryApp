@@ -76,7 +76,7 @@ const UserProfileCard = ({ items }) => {
           Uploads
         </Text>
       </Box>
-      <Box margin="200px 0 65px 0" padding="0" overflow="scroll">
+      <Box margin="230px 0 65px 0" padding="0" overflow="scroll">
         {filteredItems && filteredItems.length != 0 ? (
           <GridContainer items={filteredItems} />
         ) : (
