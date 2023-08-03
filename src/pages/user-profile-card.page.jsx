@@ -10,15 +10,21 @@ const UserProfileCard = ({ items }) => {
   const username = new URLSearchParams(window.location.search).get("user");
 
   const userDetails = userList.find((user) => {
+    let userD = "";
     if (user.username === username) {
-      return user;
+      userD = user;
+      // return user;
     }
+    return userD;
   });
 
   const filteredItems = items.filter((item) => {
+    let filtered = "";
     if (item.uploadedBy === userDetails.id) {
-      return item;
+      filtered = item;
+      // return item;
     }
+    return filtered
   });
 
   return (
@@ -77,7 +83,7 @@ const UserProfileCard = ({ items }) => {
         </Text>
       </Box>
       <Box margin="230px 0 65px 0" padding="0" overflow="scroll">
-        {filteredItems && filteredItems.length != 0 ? (
+        {filteredItems && filteredItems.length !== 0 ? (
           <GridContainer items={filteredItems} />
         ) : (
           <Text

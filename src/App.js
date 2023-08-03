@@ -28,7 +28,8 @@ function App() {
     authenticate();
     getAllUser();
     loadImages();
-  }, []);
+  },[]);
+  console.log("running")
 
   // console.log("USER LIST --------------", currentUser)
   return (
