@@ -1,7 +1,6 @@
 import { Box, Container, Flex, Image } from "@chakra-ui/react";
 import { HiHome, HiUserCircle } from "react-icons/hi";
 import { FiSearch } from "react-icons/fi";
-// import { GrGallery } from "react-icons/gr";
 import { BiImageAdd } from "react-icons/bi";
 import { Link, Outlet } from "react-router-dom";
 import { useAuthContext } from "../contexts/auth.context";
@@ -51,17 +50,6 @@ const Navbar = () => {
             <BiImageAdd size="35px" />
             </Link>
           </Box>
-          {/* <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            justifyContent="center"
-            gap="2px"
-          >
-            <Link to='/my-gallery'>
-            <GrGallery size="35px" />
-            </Link>
-          </Box> */}
           <Box
             display="flex"
             flexDirection="column"

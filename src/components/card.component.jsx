@@ -107,9 +107,8 @@ const CardComponent = ({ item }) => {
           <FaRegComment size="25px" onClick={() => { navigate(`/home/${id}/comments`) }} />
         </Box>
         {likedBy.length === 1 ? <Text fontWeight='600' marginLeft='5px'>{`${likedBy.length} like`}</Text> : <Text fontWeight='600' marginLeft='5px' >{`${likedBy.length} likes`}</Text>}
-        <Box marginLeft='5px' display='flex' alignItems='center' gap='3px' >
-          <Text fontWeight='600' >{userDetail.username}</Text>
-          <Text width='100%' >{caption}</Text>
+        <Box marginLeft='5px' display='flex' alignItems='flex-start' gap='3px' >
+          <Text><span style={{fontWeight:'600'}}>{userDetail.username}</span>{" "}{caption}</Text>
         </Box>
         <Text marginLeft='5px' fontSize='13px' color='gray.500' >{uploadedPostTImeDifference()}</Text>
       </Container>
