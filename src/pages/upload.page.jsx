@@ -151,7 +151,7 @@ const UploadPage = () => {
                   onClick={onOpen}
                   bg="none"
                   _focus={{
-                    backgroundColor: "rgba(255,255,255,.1)",
+                    backgroundColor: "none",
                     border: "none",
                     outline: "none",
                   }}

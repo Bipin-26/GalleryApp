@@ -1,15 +1,17 @@
-import { Box, Container, Image, Text, Divider } from "@chakra-ui/react";
+import { Box, Container, Image, Text, Divider, Spinner } from "@chakra-ui/react";
 import { useAuthContext } from "../contexts/auth.context";
 import { BsArrowLeft } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import GridContainer from "../components/grid-container.component";
+import { useContext } from "react";
+import { GalleryContext } from "../contexts/gallery.context";
 
 const UserProfileCard = ({ items }) => {
   const navigate = useNavigate();
   const { userList } = useAuthContext();
   const username = new URLSearchParams(window.location.search).get("user");
-
-  const userDetails = userList.find((user) => {
+  const { state } = useContext(GalleryContext)
+  const userDetails = userList!==null && userList.find((user) => {
     let userD = "";
     if (user.username === username) {
       userD = user;
@@ -28,7 +30,15 @@ const UserProfileCard = ({ items }) => {
   });
 
   return (
+    <>
+    {
+      state.isLoading ? 
+      <Box height='100vh' display='flex' justifyContent='center' alignItems='center' >
+                  <Spinner size='xl' />
+              </Box> :
+              
     <Container margin="0" padding="0">
+      
       <Box
         position="fixed"
         top="0"
@@ -97,6 +107,8 @@ const UserProfileCard = ({ items }) => {
         )}
       </Box>
     </Container>
+    }
+    </>
   );
 };
 

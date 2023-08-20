@@ -3,15 +3,18 @@ import {
   Input,
   Box,
   Text,
-  Avatar
+  Avatar,
+  StatHelpText,
+  Spinner
 } from "@chakra-ui/react";
 // import CardComponent from "../components/card.component";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useAuthContext } from "../contexts/auth.context";
 // import { GalleryContext } from "../contexts/gallery.context";
 import { createSearchParams, useNavigate } from "react-router-dom";
 // import SingleCardComponent from "../components/cardModal.component";
 import GridContainer from "../components/grid-container.component";
+import { GalleryContext } from "../contexts/gallery.context";
 // import CardModal from "../components/cardModal.component";
 
 const Search = ({ items }) => {
@@ -19,6 +22,7 @@ const Search = ({ items }) => {
   const [filteredUserList, setFilteredUserList] = useState(null);
   const { username } = useAuthContext()
   const { userList } = useAuthContext()
+  const { state } = useContext(GalleryContext)
   // const { getFilteredItems } = useContext(GalleryContext)
   const navigate = useNavigate();
   const handleSearch = (e) => {
@@ -72,6 +76,11 @@ const Search = ({ items }) => {
           )
         })}
       </Box>
+      {
+        state.isLoading ? <Box height='100vh' display='flex' justifyContent='center' alignItems='center' >
+        <Spinner size='xl' />
+    </Box> :
+
       <Container
         margin="70px 0"
         padding='0'
@@ -88,6 +97,7 @@ const Search = ({ items }) => {
         </Text>
         }
       </Container>
+      }
     </>
   );
 };

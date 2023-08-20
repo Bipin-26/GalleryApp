@@ -13,7 +13,8 @@ import {
   Menu,
   MenuButton,
   MenuList,
-  MenuItem
+  MenuItem,
+  Spinner
 } from "@chakra-ui/react";
 import { useAuthContext } from "../contexts/auth.context";
 import { createSearchParams, useNavigate } from "react-router-dom";
@@ -64,6 +65,8 @@ const { deleteDoc } = Firestore;
 
 const Profile = ({ items }) => {
   // console.log("YOU ARE INSIDE PROFILE PAGE")
+  const {state} = useContext(GalleryContext);
+  console.log(state.isLoading)
   const { logout, currentUserDetail } = useAuthContext();
   const navigate = useNavigate();
   // const [isEditing, setIsEditing] = useState(false)
@@ -104,11 +107,14 @@ const Profile = ({ items }) => {
 
 
   const onDeleteHandler = () => {
-    // console.log("YOU ARE INSIDE DELETE FUNCTION IN PROFILE")
     deleteDoc(modalItem.id, "gallery").then(loadImages)
   }
   return (
     <>
+    {
+      state.isLoading ? <Box height='100vh' display='flex' justifyContent='center' alignItems='center' >
+      <Spinner size='xl' />
+  </Box> :
       <Container margin="0 0 95px 0" padding="0">
         <Box
           display="flex"
@@ -117,10 +123,8 @@ const Profile = ({ items }) => {
           position="fixed"
           top="0"
           bg="white"
-          height="220px"
           width="100%"
           paddingBottom="10px"
-          borderBottom="2px solid gray"
         >
           <Box
             display="flex"
@@ -161,14 +165,14 @@ const Profile = ({ items }) => {
           fontWeight="600"
           textAlign="center"
           position="fixed"
-          top="220px"
+          top="200px"
           padding="10px 0"
           bg="white"
           width="100%"
         >
           Your Uploads
         </Text>
-        <Box marginTop="265px">
+        <Box marginTop='250px' >
           {
           currentUserUploadedDates.length > 0 ? (
             currentUserUploadedDates.map((uploadDate) => {
@@ -262,6 +266,7 @@ const Profile = ({ items }) => {
           )}
         </Box>
       </Container>
+    }
     </>
   );
 };

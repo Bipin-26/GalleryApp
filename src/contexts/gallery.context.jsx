@@ -13,6 +13,8 @@ const initialState = {
   count: images.length,
   inputs: { title: null, caption: null, file: null, path: null },
   isUploading: false,
+  isLoading: false,
+  error: null,
 };
 
 const handleOnChange = (state, e) => {
@@ -35,14 +37,26 @@ const handleOnChange = (state, e) => {
   }
 };
 
-const galleryReducer = (state, action) => {
+const galleryReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "LOAD_IMAGES":
+    case "LOAD_IMAGES_START":
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case "LOAD_IMAGES_SUCCESS":
       return {
         ...state,
         items: action.payload.items,
+        isLoading: false,
       };
-
+    case "LOAD_IMAGES_FAILED":
+      return {
+        ...state,
+        // items: action.payload.items,
+        isLoading: false,
+        error: action.payload.error,
+      };
     case "SET_INPUTS":
       return {
         ...state,
@@ -64,23 +78,29 @@ const galleryReducer = (state, action) => {
 };
 
 export const GalleryProvider = ({ children }) => {
-  const [state, dispatch, isUploading, likedBy] = useReducer(
+  const [state, dispatch] = useReducer(
     galleryReducer,
     initialState
   );
 
+  console.log(state);
+
   const [modalItem, setModalItem] = useState(null);
-  const [loading, setLoading] = useState(true)
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [displayAlert, setDisplayAlert] = useState(false)
+  const [displayAlert, setDisplayAlert] = useState(false);
   const loadImages = async () => {
-    const items = await readDoc("gallery");
-    dispatch({ type: "LOAD_IMAGES", payload: { items:items, loading:false } });
+    dispatch({ type: "LOAD_IMAGES_START" });
+    try {
+      const items = await readDoc("gallery");
+      dispatch({ type: "LOAD_IMAGES_SUCCESS", payload: { items: items } });
+    } catch (error) {
+      dispatch({ type: "LOAD_IMAGES_FAILED", payload: { error: error } });
+    }
   };
 
-  const loadingHandler = () => {
-    setLoading(false);
-  }
+  // const loadingHandler = () => {
+  //   setLoading(false);
+  // }
 
   const onModalHandler = (item) => {
     setModalItem(item);
@@ -91,8 +111,7 @@ export const GalleryProvider = ({ children }) => {
   };
 
   const getFilteredItems = (userId) => {
-
-      return state.items.filter(item => item.uploadedBy === userId)
+    return state.items.filter((item) => item.uploadedBy === userId);
   };
 
   return (
@@ -101,8 +120,6 @@ export const GalleryProvider = ({ children }) => {
         state,
         dispatch,
         loadImages,
-        likedBy,
-        isUploading,
         getFilteredItems,
         // filteredItems,
         imageLikeHandler,
@@ -112,10 +129,10 @@ export const GalleryProvider = ({ children }) => {
         onOpen,
         setModalItem,
         modalItem,
-        loading,
-        loadingHandler,
+        // loading,
+        // loadingHandler,
         displayAlert,
-        setDisplayAlert
+        setDisplayAlert,
       }}
     >
       {children}
