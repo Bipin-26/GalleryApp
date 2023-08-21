@@ -1,4 +1,4 @@
-import { createContext, useReducer, useState } from "react";
+import { createContext, useMemo, useReducer, useState } from "react";
 import Firestore from "../utils/firestore.utils";
 import { useDisclosure } from "@chakra-ui/react";
 
@@ -71,11 +71,7 @@ const galleryReducer = (state = initialState, action) => {
 };
 
 export const GalleryProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(
-    galleryReducer,
-    initialState
-  );
-
+  const [state, dispatch] = useReducer(galleryReducer, initialState);
 
   const [modalItem, setModalItem] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -94,7 +90,7 @@ export const GalleryProvider = ({ children }) => {
   const getImages = async () => {
     const items = await readDoc("gallery");
     dispatch({ type: "LOAD_IMAGES_SUCCESS", payload: { items: items } });
-  }
+  };
 
   const onModalHandler = (item) => {
     setModalItem(item);
@@ -103,10 +99,10 @@ export const GalleryProvider = ({ children }) => {
   const imageLikeHandler = (id, username) => {
     setLikedImageId(id);
     setShowLikeIcon(true);
-    setTimeout(()=>{
+    setTimeout(() => {
       setLikedImageId(null);
-      setShowLikeIcon(false)
-    },1000);
+      setShowLikeIcon(false);
+    }, 1000);
     updateDoc(id, "gallery", username).then(getImages);
   };
 
@@ -114,28 +110,45 @@ export const GalleryProvider = ({ children }) => {
     return state.items.filter((item) => item.uploadedBy === userId);
   };
 
+  const value = useMemo(() => {
+    return {
+      state,
+      dispatch,
+      loadImages,
+      getFilteredItems,
+      imageLikeHandler,
+      onModalHandler,
+      isOpen,
+      onClose,
+      onOpen,
+      setModalItem,
+      modalItem,
+      displayAlert,
+      setDisplayAlert,
+      showLikeIcon,
+      getImages,
+      likedImageId,
+    };
+  }, [
+    state,
+    dispatch,
+    loadImages,
+    getFilteredItems,
+    imageLikeHandler,
+    onModalHandler,
+    isOpen,
+    onClose,
+    onOpen,
+    setModalItem,
+    modalItem,
+    displayAlert,
+    setDisplayAlert,
+    showLikeIcon,
+    getImages,
+    likedImageId,
+  ]);
+
   return (
-    <GalleryContext.Provider
-      value={{
-        state,
-        dispatch,
-        loadImages,
-        getFilteredItems,
-        imageLikeHandler,
-        onModalHandler,
-        isOpen,
-        onClose,
-        onOpen,
-        setModalItem,
-        modalItem,
-        displayAlert,
-        setDisplayAlert,
-        showLikeIcon,
-        getImages,
-        likedImageId
-      }}
-    >
-      {children}
-    </GalleryContext.Provider>
+    <GalleryContext.Provider value={value}>{children}</GalleryContext.Provider>
   );
 };

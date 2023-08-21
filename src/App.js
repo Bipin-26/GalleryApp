@@ -6,29 +6,31 @@ import Home from "./pages/home.page";
 import Search from "./pages/search.page";
 import { useContext, useEffect } from "react";
 import { GalleryContext } from "./contexts/gallery.context";
-// import Firestore from "./utils/firestore.utils";
 import UploadPage from "./pages/upload.page";
 import { useAuthContext } from "./contexts/auth.context";
 import SignInPage from "./pages/signIn.page";
 import Profile from "./pages/profile.page";
 import CommentSection from "./components/comments.component";
-// import MyGallery from "./pages/my-gallery";
 import UserProfileCard from "./pages/user-profile-card.page";
 import EditPage from "./pages/edit.page";
 import PageNotFound from "./pages/404.page";
 import AlertContainer from "./components/alert.component";
 
 function App() {
-  // const { readDoc } = Firestore;
   const { authenticate, getAllUser } = useAuthContext();
 
-  const { state, loadImages } = useContext(GalleryContext);
+  const { state, loadImages, getImages } = useContext(GalleryContext);
 
   useEffect(() => {
     authenticate();
     getAllUser();
     loadImages();
-  }, [state.items.length]);
+  }, []);
+
+  useEffect(() => {
+    getImages();
+  },[state.items])
+
   return (
     <>
       <Show breakpoint="(max-width: 480px)">

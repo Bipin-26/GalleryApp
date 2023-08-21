@@ -48,7 +48,6 @@ const Search = ({ items }) => {
         justifyContent="center"
         alignItems="center"
         padding="10px 0"
-        borderBottom="1px solid grey"
         position="fixed"
         top="0"
         bg="white"
