@@ -21,7 +21,6 @@ const SignIn = () => {
             alt="This is background image"
             opacity='0.45'
             overflow='hidden'
-
           />
         </Box>
         <Box

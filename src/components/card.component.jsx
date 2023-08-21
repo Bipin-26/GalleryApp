@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { useContext } from "react";
 import { FaRegHeart, FaRegComment, FaHeart } from "react-icons/fa";
+import { motion } from "framer-motion";
 import { GalleryContext } from "../contexts/gallery.context";
 import { useAuthContext } from "../contexts/auth.context";
 import { createSearchParams, useLocation, useNavigate } from "react-router-dom";
@@ -19,7 +20,8 @@ const CardComponent = ({ item }) => {
 
   const { path, caption, id, likedBy, uploadedBy, uploadedAt, previewType } = item;
   const { username, getUserDetailsById } = useAuthContext();
-  const { imageLikeHandler } = useContext(GalleryContext)
+  const { imageLikeHandler, showLikeIcon, likedImageId } = useContext(GalleryContext)
+
   const navigate = useNavigate()
   const url = useLocation()
   const userDetail = getUserDetailsById(uploadedBy);
@@ -87,6 +89,23 @@ const CardComponent = ({ item }) => {
         <Card margin="0" padding="0" bg="#000" w="100%" h="400px" borderRadius='none' >
           <CardBody margin="0" padding="0" height="inherit">
             <Image src={path} boxSize="100%" objectFit={previewType} onClick={doubleClickHandler} />
+            {
+             ((likedImageId == id) && showLikeIcon) && 
+            <Box position='absolute' top='50%' left='50%' transform='translate(-50%,-50%)'>
+            <motion.div
+              className="box"
+              animate={{
+                scale: ['0','0.5','1.5','0.5','0'],
+              }}
+              transition={{
+                duration: '1.1',
+                ease: "easeInOut",
+              }}
+            >
+              <FaHeart size="100px" fill="red" />
+            </motion.div>
+            </Box>
+            }
           </CardBody>
         </Card>
         {

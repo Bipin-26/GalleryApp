@@ -5,8 +5,6 @@ import { v4 as uuidv4 } from 'uuid'
 const Storage = {
   uploadFile: (media) => {
     return new Promise(async (resolve) => {
-        // console.log("You are inside uploadFile")
-
       try {
         const fileId = uuidv4();
         const fileRef = ref(storage, `images/${fileId}`);

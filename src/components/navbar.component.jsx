@@ -20,7 +20,7 @@ const Navbar = () => {
         bg="#fff"
       >
         <Box
-          borderTop="1px solid grey"
+          borderTop="2px solid lightgrey"
           borderRadius="0px"
           padding="10px 10px"
           margin="0"

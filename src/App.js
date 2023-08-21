@@ -1,5 +1,5 @@
 // import './App.css';
-import {  Show,  Hide } from "@chakra-ui/react";
+import { Show, Hide } from "@chakra-ui/react";
 import Navbar from "./components/navbar.component";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/home.page";
@@ -28,14 +28,11 @@ function App() {
     authenticate();
     getAllUser();
     loadImages();
-  },[]);
-  console.log("running")
-
-  // console.log("USER LIST --------------", currentUser)
+  }, [state.items.length]);
   return (
     <>
-    <Show breakpoint='(max-width: 480px)'>
-    <Routes>
+      <Show breakpoint="(max-width: 480px)">
+        <Routes>
           <Route path="/home" element={<Navbar />}>
             <Route index element={<Home />} />
             <Route
@@ -44,7 +41,10 @@ function App() {
             />
             <Route path="/home/upload-image" element={<UploadPage />} />
             <Route path="/home/edit-post" element={<EditPage />} />
-            <Route path="/home/profile" element={<Profile items={state.items} />} />
+            <Route
+              path="/home/profile"
+              element={<Profile items={state.items} />}
+            />
             <Route
               path="/home/uploadedBy"
               element={<UserProfileCard items={state.items} />}
@@ -56,11 +56,11 @@ function App() {
           />
           <Route path="*" element={<PageNotFound />} />
           <Route exact path="/" element={<SignInPage />} />
-    </Routes>
-    </Show>
-    <Hide breakpoint='(max-width:480px)'>
-      <AlertContainer />
-    </Hide>
+        </Routes>
+      </Show>
+      <Hide breakpoint="(max-width:480px)">
+        <AlertContainer />
+      </Hide>
     </>
   );
 }

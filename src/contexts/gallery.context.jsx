@@ -12,7 +12,6 @@ const initialState = {
   items: images,
   count: images.length,
   inputs: { title: null, caption: null, file: null, path: null },
-  isUploading: false,
   isLoading: false,
   error: null,
 };
@@ -53,7 +52,6 @@ const galleryReducer = (state = initialState, action) => {
     case "LOAD_IMAGES_FAILED":
       return {
         ...state,
-        // items: action.payload.items,
         isLoading: false,
         error: action.payload.error,
       };
@@ -67,11 +65,6 @@ const galleryReducer = (state = initialState, action) => {
         ...state,
         inputs: action.payload.inputs,
       };
-    case "SET_UPLOADING":
-      return {
-        ...state,
-        isUploading: action.payload.isUploading,
-      };
     default:
       return state;
   }
@@ -83,31 +76,38 @@ export const GalleryProvider = ({ children }) => {
     initialState
   );
 
-  console.log(state);
 
   const [modalItem, setModalItem] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [displayAlert, setDisplayAlert] = useState(false);
+  const [likedImageId, setLikedImageId] = useState(null);
+  const [showLikeIcon, setShowLikeIcon] = useState(false);
   const loadImages = async () => {
     dispatch({ type: "LOAD_IMAGES_START" });
     try {
-      const items = await readDoc("gallery");
-      dispatch({ type: "LOAD_IMAGES_SUCCESS", payload: { items: items } });
+      getImages();
     } catch (error) {
       dispatch({ type: "LOAD_IMAGES_FAILED", payload: { error: error } });
     }
   };
 
-  // const loadingHandler = () => {
-  //   setLoading(false);
-  // }
+  const getImages = async () => {
+    const items = await readDoc("gallery");
+    dispatch({ type: "LOAD_IMAGES_SUCCESS", payload: { items: items } });
+  }
 
   const onModalHandler = (item) => {
     setModalItem(item);
   };
 
   const imageLikeHandler = (id, username) => {
-    updateDoc(id, "gallery", username).then(loadImages);
+    setLikedImageId(id);
+    setShowLikeIcon(true);
+    setTimeout(()=>{
+      setLikedImageId(null);
+      setShowLikeIcon(false)
+    },1000);
+    updateDoc(id, "gallery", username).then(getImages);
   };
 
   const getFilteredItems = (userId) => {
@@ -121,7 +121,6 @@ export const GalleryProvider = ({ children }) => {
         dispatch,
         loadImages,
         getFilteredItems,
-        // filteredItems,
         imageLikeHandler,
         onModalHandler,
         isOpen,
@@ -129,10 +128,11 @@ export const GalleryProvider = ({ children }) => {
         onOpen,
         setModalItem,
         modalItem,
-        // loading,
-        // loadingHandler,
         displayAlert,
         setDisplayAlert,
+        showLikeIcon,
+        getImages,
+        likedImageId
       }}
     >
       {children}
