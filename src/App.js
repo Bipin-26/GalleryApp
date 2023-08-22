@@ -19,17 +19,13 @@ import AlertContainer from "./components/alert.component";
 function App() {
   const { authenticate, getAllUser } = useAuthContext();
 
-  const { state, loadImages, getImages } = useContext(GalleryContext);
+  const { state, loadImages } = useContext(GalleryContext);
 
   useEffect(() => {
     authenticate();
     getAllUser();
     loadImages();
   }, []);
-
-  useEffect(() => {
-    getImages();
-  },[state.items])
 
   return (
     <>
