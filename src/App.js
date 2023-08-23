@@ -1,4 +1,4 @@
-// import './App.css';
+import './App.css';
 import { Show, Hide } from "@chakra-ui/react";
 import Navbar from "./components/navbar.component";
 import { Routes, Route } from "react-router-dom";
