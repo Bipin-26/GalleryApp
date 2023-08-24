@@ -1,10 +1,9 @@
-import './App.css';
 import { Show, Hide } from "@chakra-ui/react";
 import Navbar from "./components/navbar.component";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/home.page";
 import Search from "./pages/search.page";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useMemo } from "react";
 import { GalleryContext } from "./contexts/gallery.context";
 import UploadPage from "./pages/upload.page";
 import { useAuthContext } from "./contexts/auth.context";
