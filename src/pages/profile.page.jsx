@@ -19,7 +19,7 @@ import {
 import { useAuthContext } from "../contexts/auth.context";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import { CiMenuKebab } from "react-icons/ci";
-import { useContext, useEffect } from "react";
+import { Fragment, useContext, useEffect } from "react";
 import { GalleryContext } from "../contexts/gallery.context";
 import CardComponent from "../components/card.component";
 import Firestore from "../utils/firestore.utils";
@@ -162,7 +162,7 @@ const Profile = ({ items }) => {
                 {currentUserUploadedDates.length > 0 ? (
                   currentUserUploadedDates.map((uploadDate) => {
                     return (
-                      <>
+                      <Fragment key={uploadDate}>
                         <Text
                           fontWeight="600"
                           color="gray"
@@ -186,7 +186,6 @@ const Profile = ({ items }) => {
                             {
                               if (imageUploadDate === uploadDate) {
                                 return (
-                                  <>
                                     <GridItem
                                       key={item.id}
                                       w="100%"
@@ -200,7 +199,6 @@ const Profile = ({ items }) => {
                                         onClick={() => onModalHandler(item)}
                                       />
                                     </GridItem>
-                                  </>
                                 );
                               }
                             }
@@ -254,7 +252,7 @@ const Profile = ({ items }) => {
                             </ModalContent>
                           </Modal>
                         )}
-                      </>
+                      </Fragment>
                     );
                   })
                 ) : (

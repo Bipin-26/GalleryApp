@@ -16,7 +16,7 @@ import {
   ModalFooter,
   ModalBody,
   Progress,
-  useDisclosure
+  useDisclosure,
 } from "@chakra-ui/react";
 import { useContext, useRef, useState } from "react";
 
@@ -27,6 +27,8 @@ import Firestore from "../utils/firestore.utils";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../contexts/auth.context";
 import { getCurrentTime } from "../utils/time.utils";
+import Compressor from "compressorjs";
+import { MdLabelImportantOutline } from "react-icons/md";
 
 const { uploadFile, downloadFile } = Storage;
 const { writeDoc } = Firestore;
@@ -57,25 +59,33 @@ const UploadPage = () => {
   const handleOnSubmit = (e) => {
     e.preventDefault();
     setIsUploading(true);
-    uploadFile(state.inputs)
-      .then(downloadFile)
-      .then((url) => {
-        writeDoc(
-          {
-            ...state.inputs,
-            path: url,
-            uploadedBy: currentUserDetail.id,
-            uploadedAt: currentTime,
-            previewType: previewObjectFit,
-          },
-          "gallery"
-        ).then(() => {
-          loadImages();
-          navigate("/home");
-          setIsUploading(false);
-          clearPreview();
-        });
-      });
+    new Compressor(state.inputs.file, {
+      quality: 0.6,
+      success(result) {
+        const compressedInput = {...state.inputs, file:result, path:URL.createObjectURL(result)}
+        console.log("COMPRESSED INPUTS", compressedInput)
+        uploadFile(compressedInput)
+          .then(downloadFile)
+          .then((url) => {
+            writeDoc(
+              {
+                ...state.inputs,
+                path: url,
+                uploadedBy: currentUserDetail.id,
+                uploadedAt: currentTime,
+                previewType: previewObjectFit,
+              },
+              "gallery"
+            ).then(() => {
+              loadImages();
+              navigate("/home");
+              setIsUploading(false);
+              clearPreview();
+            });
+          });
+      },
+    });
+    
   };
 
   return (
