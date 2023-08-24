@@ -16,11 +16,9 @@ const GridContainer = ({items}) => {
         <Grid templateColumns="repeat(2, 1fr)" gap={.5}>
           {items.map((item) => {
             return (
-              <>
-              <GridItem w="100%" h="180" bg="blue.300" outline='1px solid white' onClick={onOpen}>
+              <GridItem key={item.id} w="100%" h="180" bg="blue.300" outline='1px solid white' onClick={onOpen}>
                 <Image src={item.path} objectFit="cover" boxSize="100%"  onClick={() => onModalHandler(item)} />
               </GridItem>
-              </>
             );
           })}
         {

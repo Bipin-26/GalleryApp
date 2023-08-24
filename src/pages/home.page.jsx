@@ -44,7 +44,7 @@ const Home = () => {
               <Box margin="65px 0" padding="0" overflow="scroll">
                 {state.items.length > 0 ? (
                   state.items.map((item) => (
-                    <Box marginTop="10px" marginBottom="5px">
+                    <Box key={item.id} marginTop="10px" marginBottom="5px">
                       <CardComponent item={item} />
                     </Box>
                   ))
