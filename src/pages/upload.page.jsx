@@ -63,7 +63,6 @@ const UploadPage = () => {
       quality: 0.6,
       success(result) {
         const compressedInput = {...state.inputs, file:result, path:URL.createObjectURL(result)}
-        console.log("COMPRESSED INPUTS", compressedInput)
         uploadFile(compressedInput)
           .then(downloadFile)
           .then((url) => {
